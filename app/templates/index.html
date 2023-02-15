@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block og %}
+<meta property="og:url" content="https://{{ base_path }}/colab_fold_viewer"/>
+<meta property="og:description"
+      content=""/>
+{% endblock %}
+{% block head %}
+<title>ColabFold: AlphaFold2 using MMseqs2</title>
+{% endblock %}
+
+{% block body %}
+<div class="container-fluid px-5 py-3">
+    <h2>ColabFold: AlphaFold2 using MMseqs2</h2>
+    <p>ColabFold speeds up predicting protein structures and complexes by using MMseqs2's quick homology search with AlphaFold2.</p>
+    <div class="row mt-4">
+        <div class="col-5">
+            <div id="guide" class="row mt-3">
+                <p>Upload a protein sequence in FASTA format for structure
+                    prediction via the ColabFold. We will run a CodeOcean
+                    capsule to generate the prediction and display the results.</p>
+            </div>
+            <div id="upload" class="row mt-3">
+                <div class="col-3">
+                    <p>Fasta file</p>
+                </div>
+                <div class="col-9">
+                    <form method=post enctype=multipart/form-data>
+                        <input type=file name=file>
+                        <input type=submit value=Upload>
+                    </form>
+                </div>
+            </div>
+            <div id="record" class="row mt-3">
+                <div class="col-3">
+                    <p>Record name</p>
+                </div>
+                <div class="col-9">
+                    <textarea class="w-100"></textarea>
+                </div>
+            </div>
+            <div id="sequence" class="row mt-3">
+                <div class="col-3">
+                    <p>Sequence</p>
+                </div>
+                <div class="col-9">
+                    <textarea class="w-100" rows=12></textarea>
+                </div>
+            </div>
+            <div id="time_out" class="row mt-3">
+                <p>Predicting the structure of a protein this size usually takes
+                    3–5 minutes. You can copy the prediction URL and return
+                    to this page later.</p>
+            </div>
+            <div id="prediction_url" class="row mt-3">
+                <div class="col-3">
+                    <p>Prediction URL</p>
+                </div>
+                <div class="col-9">
+                    <textarea class="w-100"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="col-7">
+            <iframe src="{{ url_for('static', filename='VisualizePDBs.html') }}" width="800" height="600"></iframe>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+
+        </div>
+    </div>
+</footer>
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript" src="{{ url_for('static', filename='index.js') }}"></script>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+{% endblock %}

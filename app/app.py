@@ -18,7 +18,8 @@ def allowed_file(filename):
 
 
 @app.route('/', methods=['GET'])
-def index():
+@app.route('/computation/<computation_id>')
+def index(computation_id=''):
     return render_template('index.html')
 
 
@@ -48,15 +49,19 @@ def run():
     # Returns computation_id from CO API
     name = request.json.get('name')
     sequence = request.json.get('sequence')
-    return run_capsule(name, sequence)
+    return {'computation_id': run_capsule(name, sequence)}
 
 
-@app.route('/{computation_id}/status', methods=['GET'])
-def status():
-    computation_id = request.json.get('computation_id')
+@app.route('/computation/<computation_id>/status', methods=['GET'])
+def status(computation_id):
+    print(computation_id)
     if get_computation_state(computation_id) == 'completed':
         get_result(computation_id, './app/temp/predicted_structure.pdb')
+    return
 
+
+@app.route('/computation/<computation_id>/result', methods=['GET'])
+def result():
     return
 
 

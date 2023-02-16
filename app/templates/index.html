@@ -25,39 +25,44 @@
                     <p>Fasta file</p>
                 </div>
                 <div class="col-9">
-                    <form method=post enctype=multipart/form-data>
-                        <input type=file name=file>
-                        <input type=submit value=Upload>
+                    <form id="form_upload" enctype=multipart/form-data>
+                        <input id="file_fasta" type=file name=file>
+                        <button id="bt_upload" onclick="upload();" type="button">Upload</button>
                     </form>
                 </div>
             </div>
             <div id="record" class="row mt-3">
                 <div class="col-3">
-                    <p>Record name</p>
+                    <label for="seq_name">Record name</label>
                 </div>
                 <div class="col-9">
-                    <textarea class="w-100"></textarea>
+                    <textarea id="seq_name" class="w-100"></textarea>
                 </div>
             </div>
             <div id="sequence" class="row mt-3">
                 <div class="col-3">
-                    <p>Sequence</p>
+                    <label for="seq_content">Sequence</label>
                 </div>
                 <div class="col-9">
-                    <textarea class="w-100" rows=12></textarea>
+                    <textarea id="seq_content" class="w-100" rows=12></textarea>
                 </div>
             </div>
-            <div id="time_out" class="row mt-3">
+            <div id="predict" class="row mt-3">
+                <div class="col-12 float-end">
+                    <button id="bt_predict" disabled="true" class="btn btn-secondary btn-sm float-end" onclick="run();">Predict structure</button>
+                </div>
+            </div>
+            <div id="time_out" class="row mt-3" style="display: none">
                 <p>Predicting the structure of a protein this size usually takes
                     3–5 minutes. You can copy the prediction URL and return
                     to this page later.</p>
             </div>
-            <div id="prediction_url" class="row mt-3">
+            <div id="prediction" class="row mt-3" style="display: none">
                 <div class="col-3">
-                    <p>Prediction URL</p>
+                    <label for="prediction_url">Prediction URL</label>
                 </div>
                 <div class="col-9">
-                    <textarea class="w-100"></textarea>
+                    <textarea id="prediction_url" class="w-100"></textarea>
                 </div>
             </div>
         </div>

@@ -60,7 +60,7 @@ async function listener_status(computation_id) {
         const data = await response.json();
 
         if (data.status === 'completed') {
-            render_result(computation_id);
+            render_result();
             break;
         }
 
@@ -70,8 +70,9 @@ async function listener_status(computation_id) {
 }
 
 
-function render_result(render_result) {
-
+function render_result() {
+    let iframe = $('#if_structure');
+    iframe.attr("src", '');
 }
 
 

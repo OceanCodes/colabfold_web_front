@@ -5,7 +5,7 @@ from Bio import SeqIO
 from app.co_api import run_capsule, get_computation_state, get_result
 import json
 
-UPLOAD_FOLDER = './app/temp'
+UPLOAD_FOLDER = './app/static'
 ALLOWED_EXTENSIONS = {'fa', 'fasta'}
 
 app = Flask(__name__)
@@ -55,19 +55,14 @@ def run():
 
 @app.route('/computation/<computation_id>/status', methods=['GET'])
 def status(computation_id):
-    if get_computation_state(computation_id) == 'completed':
-        get_result(computation_id, f'./app/temp/{computation_id}_VisualizePDBs.html')
-    return json.dumps({'success': True, 'data': {}}), 200, {'ContentType': 'application/json'}
+    state = get_computation_state(computation_id)
+    return json.dumps({'success': True, 'status': state}), 200, {'ContentType': 'application/json'}
 
 
 @app.route('/computation/<computation_id>/result', methods=['GET'])
-def result():
-    return
-
-
-@app.route('/temp/<path:filename>', methods=['GET'])
-def download_file(filename):
-    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
+def result(computation_id):
+    get_result(computation_id, f"{app.config['UPLOAD_FOLDER']}/{computation_id}_VisualizePDBs.html")
+    return send_from_directory(app.config['UPLOAD_FOLDER'], f"{computation_id}_VisualizePDBs.html")
 
 
 @app.errorhandler(404)

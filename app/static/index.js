@@ -47,7 +47,7 @@ function run() {
             $('#time_out').show();
             $('#prediction_url').val(window.location.href);
             $('#prediction').show();
-
+            listener_status(data['computation_id']).then(r => console.log(`Listening to computation ${data['computation_id']}`));
         })
         .catch(error => {
             console.error(error);
@@ -60,7 +60,8 @@ async function listener_status(computation_id) {
         const data = await response.json();
 
         if (data.status === 'completed') {
-            render_result();
+            console.log('Computation completed')
+            render_result(computation_id);
             break;
         }
 
@@ -70,9 +71,9 @@ async function listener_status(computation_id) {
 }
 
 
-function render_result() {
+function render_result(computation_id) {
     let iframe = $('#if_structure');
-    iframe.attr("src", '');
+    iframe.attr('src', `/static/${computation_id}_VisualizePDBs.html`);
 }
 
 

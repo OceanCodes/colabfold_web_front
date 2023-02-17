@@ -36,7 +36,7 @@ def get_computation_state(computation_id):
     return computation_state
 
 
-def get_result(computation_id, fp='./app/temp/VisualizePDBs.html'):
+def get_result(computation_id, fp='./app/static/VisualizePDBs.html'):
     res = co_client.get_result_file_download_url(computation_id, path_to_file).json()
     response = requests.get(res['url'])
     open(fp, 'wb').write(response.content)

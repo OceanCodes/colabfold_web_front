@@ -62,7 +62,7 @@ def status(computation_id):
 @app.route('/computation/<computation_id>/result', methods=['GET'])
 def result(computation_id):
     get_result(computation_id, f"{app.config['UPLOAD_FOLDER']}/{computation_id}_VisualizePDBs.html")
-    return send_from_directory(app.config['UPLOAD_FOLDER'], f"{computation_id}_VisualizePDBs.html")
+    return json.dumps({'success': True, 'path': f"{app.config['UPLOAD_FOLDER']}/{computation_id}_VisualizePDBs.html"}), 200, {'ContentType': 'application/json'}
 
 
 @app.errorhandler(404)

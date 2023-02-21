@@ -72,8 +72,16 @@ async function listener_status(computation_id) {
 
 
 function render_result(computation_id) {
-    let iframe = $('#if_structure');
-    iframe.attr('src', `/static/${computation_id}_VisualizePDBs.html`);
+    fetch(`/computation/${computation_id}/result`, {
+        method: 'GET',
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Can't download a result");
+            }
+            let iframe = $('#if_structure');
+            iframe.attr('src', `/static/${computation_id}_VisualizePDBs.html`);
+        })
 }
 
 

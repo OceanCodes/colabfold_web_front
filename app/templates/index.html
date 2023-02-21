@@ -10,12 +10,14 @@
 {% endblock %}
 
 {% block body %}
-<div class="container-fluid px-5 py-3">
-    <h2>ColabFold: AlphaFold2 using MMseqs2</h2>
-    <p>ColabFold speeds up predicting protein structures and complexes by using MMseqs2's quick homology search with AlphaFold2.</p>
-    <div class="row mt-4">
+<div class="container-fluid my-5 bg-white">
+    <div class="row mx-5 py-3">
+        <h2>ColabFold: AlphaFold2 using MMseqs2</h2>
+        <p>ColabFold speeds up predicting protein structures and complexes by using MMseqs2's quick homology search with AlphaFold2.</p>
+    </div>
+    <div class="row m-5">
         <div class="col-5">
-            <div id="guide" class="row mt-3">
+            <div id="guide" class="row">
                 <p>Upload a protein sequence in FASTA format for structure
                     prediction via the ColabFold. We will run a CodeOcean
                     capsule to generate the prediction and display the results.</p>
@@ -67,7 +69,7 @@
             </div>
         </div>
         <div class="col-7">
-            <iframe id="if_structure" src="{{ url_for('static', filename='VisualizePDBs.html') }}" width="800" height="600"></iframe>
+            <iframe id="if_structure" src="{{ url_for('static', filename='demo.html') }}" width="800" height="600" class="border rounded"></iframe>
         </div>
     </div>
 </div>

@@ -12,10 +12,10 @@
 {% block body %}
 <div class="container-fluid my-5 bg-white">
     <div class="row mx-5 py-3">
-        <h2>ColabFold: AlphaFold2 using MMseqs2</h2>
+        <a id="back_url" href="{{ url_for('index') }}"><h2>ColabFold: AlphaFold2 using MMseqs2</h2></a>
         <p>ColabFold speeds up predicting protein structures and complexes by using MMseqs2's quick homology search with AlphaFold2.</p>
     </div>
-    <div class="row m-5">
+    <div class="row m-5 pb-5">
         <div class="col-5">
             <div id="guide" class="row">
                 <p>Upload a protein sequence in FASTA format for structure
@@ -46,7 +46,7 @@
                     <label for="seq_content">Sequence</label>
                 </div>
                 <div class="col-9">
-                    <textarea id="seq_content" class="w-100" rows=12></textarea>
+                    <textarea id="seq_content" class="w-100" rows=6></textarea>
                 </div>
             </div>
             <div id="predict" class="row mt-3">
@@ -69,20 +69,23 @@
             </div>
         </div>
         <div class="col-7">
-            <iframe id="if_structure" src="{{ url_for('static', filename='demo.html') }}" width="800" height="600" class="border rounded"></iframe>
+            <video id="demo" preload="auto" autoplay="true" loop="loop" muted="muted" volume="0">
+                <source src="/static/demo.mp4" type="video/mp4">
+            </video>
+            <iframe id="if_structure" src="{{ url_for('static', filename='demo.html') }}" width="800" height="600"
+                    class="border rounded" style="display: none"></iframe>
         </div>
     </div>
 </div>
-{% endblock %}
-
 {% block footer %}
-<footer class="footer">
+<footer class="footer mt-auto py-3">
     <div class="container">
         <div class="row">
 
         </div>
     </div>
 </footer>
+{% endblock %}
 {% endblock %}
 
 {% block script %}

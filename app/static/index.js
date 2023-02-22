@@ -66,7 +66,7 @@ async function listener_status(computation_id) {
         }
 
         // Wait for 5 seconds before checking again
-        await new Promise(resolve => setTimeout(resolve, 5000));
+        await new Promise(resolve => setTimeout(resolve, 1000));
     }
 }
 
@@ -79,7 +79,10 @@ function render_result(computation_id) {
             if (!response.ok) {
                 throw new Error("Can't download a result");
             }
+            $('#time_out').hide();
+            $('#demo').hide();
             let iframe = $('#if_structure');
+            iframe.show();
             iframe.attr('src', `/static/${computation_id}_VisualizePDBs.html`);
         })
 }
@@ -97,7 +100,7 @@ function listener_url() {
         if (match) {
             const computation_id = match[0].split('/')[2]; // extract the matched ID from the regular expression match
             console.log(`Computation ID found: ${computation_id}`);
-            $('#time_out').show();
+            // $('#time_out').show();
             $('#prediction_url').val(window.location.href);
             $('#prediction').show();
             listener_status(computation_id).then(r => console.log('Checking the computation status'));

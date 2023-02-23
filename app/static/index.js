@@ -55,7 +55,22 @@ function run() {
 }
 
 async function listener_status(computation_id) {
-    while (true) {
+    const fileExists = file =>
+        fetch(file, {method: 'HEAD', cache: 'no-store'})
+            .then(response => ({200: true, 404: false})[response.status])
+            .catch(exception => undefined);
+
+    let yourFileExists = await fileExists(`/static/${computation_id}_predicted_structure.pdb`);
+
+    if (yourFileExists) {
+        console.log("PDB file already exist. Rendering")
+        render_result(computation_id);
+    }
+    else if (yourFileExists === false) {
+        console.log("PDB file doesn't exist yet. Listening")
+            while (true) {
+
+
         const response = await fetch(`/computation/${computation_id}/status`);
         const data = await response.json();
 
@@ -68,6 +83,7 @@ async function listener_status(computation_id) {
         // Wait for 5 seconds before checking again
         await new Promise(resolve => setTimeout(resolve, 1000));
     }
+    }
 }
 
 
@@ -75,9 +91,12 @@ function molstar(url) {
     let viewerInstance = new PDBeMolstarPlugin();
     let options = {
         customData: {
+            alphafoldView: true,
+            bgColor: {r: 255, g: 255, b: 255},
+            hideCanvasControls: ['selection', 'animation', 'controlToggle', 'controlInfo'],
+
             url: url,
             format: 'pdb',
-            hideControls: true
         }
     }
 
@@ -96,7 +115,7 @@ function render_result(computation_id) {
             $('#time_out').hide();
             $('#demo').hide();
             let iframe = $('#if_structure');
-            iframe.show();
+            // iframe.show();
             iframe.attr('src', `/static/${computation_id}_VisualizePDBs.html`);
             molstar(`/static/${computation_id}_predicted_structure.pdb`)
         })

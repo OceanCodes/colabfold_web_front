@@ -1,5 +1,5 @@
 function upload() {
-    const form_upload = $('#form_upload');
+    const form_upload = document.querySelector('#form_upload');
     const form_data = new FormData(form_upload[0]);
     fetch('/upload', {
         method: 'POST',
@@ -12,9 +12,9 @@ function upload() {
             return response.json()
         })
         .then(response => {
-            $('#seq_name').val(response['name']);
-            $('#seq_content').val(response['sequence']);
-            let bt_predict = $('#bt_predict')
+            document.querySelector('#seq_name').value = response['name'];
+            document.querySelector('#seq_content').value = response['sequence'];
+            let bt_predict = document.querySelector('#bt_predict');
             bt_predict.prop('disabled', false)
             bt_predict.addClass('btn-primary')
             bt_predict.removeClass('btn-secondary');
@@ -25,8 +25,8 @@ function upload() {
 }
 
 function run() {
-    const name = $('#seq_name').val();
-    const sequence = $('#seq_content').val();
+    const name = document.querySelector('#seq_name').value;
+    const sequence = document.querySelector('#seq_content').value;
 
     fetch('/run', {
         method: 'POST',
@@ -44,9 +44,9 @@ function run() {
         .then(data => {
             console.log(`Computation id: ${data['computation_id']}`)
             history.pushState({}, null, `computation/${data['computation_id']}`);
-            $('#time_out').show();
-            $('#prediction_url').val(window.location.href);
-            $('#prediction').show();
+            document.querySelector('#time_out').style.display = 'block';
+            document.querySelector('#prediction_url').value = window.location.href;
+            document.querySelector('#prediction').style.display = 'block';
             listener_status(data['computation_id']).then(r => console.log(`Listening to computation ${data['computation_id']}`));
         })
         .catch(error => {
@@ -109,9 +109,9 @@ function render_result(computation_id) {
             if (!response.ok) {
                 throw new Error("Can't download a result");
             }
-            $('#time_out').hide();
-            $('#demo').hide();
-            $('#molstar').show();
+            document.querySelector('#time_out').style.display = 'none';
+            document.querySelector('#demo').style.display = 'none';
+            document.querySelector('#molstar').style.display = 'block';
             molstar(`/static/${computation_id}_predicted_structure.pdb`)
         })
 }
@@ -129,9 +129,9 @@ function listener_url() {
         if (match) {
             const computation_id = match[0].split('/')[2]; // extract the matched ID from the regular expression match
             console.log(`Computation ID found: ${computation_id}`);
-            // $('#time_out').show();
-            $('#prediction_url').val(window.location.href);
-            $('#prediction').show();
+            // document.querySelector('#time_out').style.display = 'block';
+            document.querySelector('#prediction_url').value = window.location.href;
+            document.querySelector('#prediction').style.display = 'block';
             listener_status(computation_id).then(r => console.log('Checking the computation status'));
         } else {
             console.log('No Computation ID found');
@@ -139,6 +139,6 @@ function listener_url() {
     }
 }
 
-$(document).ready(function () {
+document.addEventListener('DOMContentLoaded', () => {
     listener_url();
 });

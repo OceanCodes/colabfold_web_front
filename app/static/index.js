@@ -71,6 +71,20 @@ async function listener_status(computation_id) {
 }
 
 
+function molstar(url) {
+    let viewerInstance = new PDBeMolstarPlugin();
+    let options = {
+        customData: {
+            url: url,
+            format: 'pdb',
+            hideControls: true
+        }
+    }
+
+    let viewerContainer = document.getElementById('molstar');
+    viewerInstance.render(viewerContainer, options);
+}
+
 function render_result(computation_id) {
     fetch(`/computation/${computation_id}/result`, {
         method: 'GET',
@@ -84,6 +98,7 @@ function render_result(computation_id) {
             let iframe = $('#if_structure');
             iframe.show();
             iframe.attr('src', `/static/${computation_id}_VisualizePDBs.html`);
+            molstar(`/static/${computation_id}_predicted_structure.pdb`)
         })
 }
 

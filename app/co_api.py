@@ -1,7 +1,7 @@
 import os
 import time
-import requests
 
+import requests
 from aind_codeocean_api.codeocean import CodeOceanClient
 
 co_api_token = os.getenv("CO_API_KEY")
@@ -11,7 +11,6 @@ co_client = CodeOceanClient(domain=co_domain, token=co_api_token)
 # API parameters
 capsule_id = "cb2f63ba-2030-4929-92ae-91687ca6713e"
 data_asset = [{"id": "e09a0db8-b682-4cb0-b9c6-0b7c93177777", "mount": "colabfold"}]
-path_to_file = 'VisualizePDBs.html'
 
 
 def run_capsule(sequence_name, aa_sequence, recycle_count='3'):
@@ -36,7 +35,7 @@ def get_computation_state(computation_id):
     return computation_state
 
 
-def get_result(computation_id, fp='./app/static/VisualizePDBs.html'):
+def get_result(computation_id, fp='./app/static/VisualizePDBs.html', path_to_file='VisualizePDBs.html'):
     res = co_client.get_result_file_download_url(computation_id, path_to_file).json()
     response = requests.get(res['url'])
     open(fp, 'wb').write(response.content)

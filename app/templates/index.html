@@ -13,7 +13,8 @@
 <div class="container-fluid my-5 bg-white">
     <div class="row mx-5 py-3">
         <a id="back_url" href="{{ url_for('index') }}"><h2>ColabFold: AlphaFold2 using MMseqs2</h2></a>
-        <p>ColabFold speeds up predicting protein structures and complexes by using MMseqs2's quick homology search with AlphaFold2.</p>
+        <p>ColabFold speeds up predicting protein structures and complexes by using MMseqs2's quick homology search with
+            AlphaFold2.</p>
     </div>
     <div class="row m-5 pb-5">
         <div class="col-5">
@@ -51,7 +52,9 @@
             </div>
             <div id="predict" class="row mt-3">
                 <div class="col-12 float-end">
-                    <button id="bt_predict" disabled="true" class="btn btn-secondary btn-sm float-end" onclick="run();">Predict structure</button>
+                    <button id="bt_predict" disabled="true" class="btn btn-secondary btn-sm float-end" onclick="run();">
+                        Predict structure
+                    </button>
                 </div>
             </div>
             <div id="time_out" class="row mt-3" style="display: none">
@@ -74,21 +77,20 @@
             </video>
             <iframe id="if_structure" src="{{ url_for('static', filename='demo.html') }}" width="800" height="600"
                     class="border rounded" style="display: none"></iframe>
+            <div id="molstar"></div>
         </div>
     </div>
 </div>
 {% block footer %}
-<footer class="footer mt-auto py-3">
-    <div class="container">
-        <div class="row">
-
-        </div>
-    </div>
-</footer>
 {% endblock %}
 {% endblock %}
 
 {% block script %}
 <script type="text/javascript" src="{{ url_for('static', filename='index.js') }}"></script>
-<script src="https://d3js.org/d3.v7.min.js"></script>
+
+<link rel="stylesheet" type="text/css"
+      href="https://www.ebi.ac.uk/pdbe/pdb-component-library/css/pdbe-molstar-light-3.1.0.css">
+<script type="text/javascript"
+        src="https://www.ebi.ac.uk/pdbe/pdb-component-library/js/pdbe-molstar-plugin-3.1.0.js"></script>
+
 {% endblock %}

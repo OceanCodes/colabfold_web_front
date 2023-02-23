@@ -111,6 +111,7 @@ function render_result(computation_id) {
             }
             $('#time_out').hide();
             $('#demo').hide();
+            $('#molstar').show();
             molstar(`/static/${computation_id}_predicted_structure.pdb`)
         })
 }

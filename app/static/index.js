@@ -44,9 +44,9 @@ function run() {
         .then(data => {
             console.log(`Computation id: ${data['computation_id']}`)
             history.pushState({}, null, `computation/${data['computation_id']}`);
-            document.querySelector('#time_out').style.display = 'block';
+            document.querySelector('#time_out').style.display = 'flex';
             document.querySelector('#prediction_url').value = window.location.href;
-            document.querySelector('#prediction').style.display = 'block';
+            document.querySelector('#prediction').style.display = 'flex';
             listener_status(data['computation_id']).then(r => console.log(`Listening to computation ${data['computation_id']}`));
         })
         .catch(error => {
@@ -111,11 +111,18 @@ function render_result(computation_id) {
             }
             document.querySelector('#time_out').style.display = 'none';
             document.querySelector('#demo').style.display = 'none';
-            document.querySelector('#molstar').style.display = 'block';
+            document.querySelector('#molstar').style.display = 'flex';
             molstar(`/static/${computation_id}_predicted_structure.pdb`)
         })
 }
 
+function copy_url() {
+// Copies the URL to the clipboard
+ let url = document.getElementById("prediction_url");
+  url.select();
+  url.setSelectionRange(0, 99999);
+  navigator.clipboard.writeText(url.value);
+}
 
 function listener_url() {
     const url = window.location.href;
@@ -124,6 +131,7 @@ function listener_url() {
         console.log('No Computation ID found');
     } else {
         // Not sure about this part - simple .split('/') should work too
+        document.querySelector('#upload').style.display = 'none';
         const re = /\/computation\/([a-z0-9_]+(-[a-z0-9_]+)*)$/; // regular expression to match "/computation/" followed by one or more word characters at the end of the string
         const match = re.exec(url); // attempt to match the regular expression to the URL
         if (match) {
@@ -131,7 +139,7 @@ function listener_url() {
             console.log(`Computation ID found: ${computation_id}`);
             // document.querySelector('#time_out').style.display = 'block';
             document.querySelector('#prediction_url').value = window.location.href;
-            document.querySelector('#prediction').style.display = 'block';
+            document.querySelector('#prediction').style.display = 'flex';
             listener_status(computation_id).then(r => console.log('Checking the computation status'));
         } else {
             console.log('No Computation ID found');

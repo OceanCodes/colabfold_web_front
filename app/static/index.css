@@ -2,6 +2,10 @@ body {
     background: #00a1e0;
 }
 
+textarea {
+    resize: none;
+}
+
 iframe {
     border-color: #e0e0e0;
 }

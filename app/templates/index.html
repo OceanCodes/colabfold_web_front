@@ -30,7 +30,9 @@
                 <div class="col-9">
                     <form id="form_upload" enctype=multipart/form-data>
                         <input id="file_fasta" type=file name=file>
-                        <button id="bt_upload" class="btn btn-sm btn-primary" onclick="upload();" type="button">Upload</button>
+                        <button id="bt_upload" class="btn btn-sm btn-outline-primary" onclick="upload();" type="button">
+                            Upload
+                        </button>
                     </form>
                 </div>
             </div>
@@ -39,7 +41,7 @@
                     <label for="seq_name">Record name</label>
                 </div>
                 <div class="col-9">
-                    <textarea id="seq_name" class="w-100 form-control"></textarea>
+                    <textarea id="seq_name" class="w-100 form-control" rows=1></textarea>
                 </div>
             </div>
             <div id="sequence" class="row mt-3">
@@ -47,7 +49,7 @@
                     <label for="seq_content">Sequence</label>
                 </div>
                 <div class="col-9">
-                    <textarea id="seq_content" class="w-100 form-control" rows=6></textarea>
+                    <textarea id="seq_content" class="w-100 form-control" rows=6 disabled></textarea>
                 </div>
             </div>
             <div id="predict" class="row mt-3">
@@ -67,7 +69,13 @@
                     <label for="prediction_url">Prediction URL</label>
                 </div>
                 <div class="col-9">
-                    <textarea id="prediction_url" class="w-100 form-control"></textarea>
+                    <div class="input-group mb-3">
+                        <input id="prediction_url" type="text" class="form-control" placeholder="Recipient's username"
+                               aria-label="Recipient's username" aria-describedby="button-addon2">
+                        <button class="btn btn-sm btn-outline-primary" type="button" id="button-addon2"
+                                onclick="copy_url();"><i
+                                class="far fa-copy"></i></button>
+                    </div>
                 </div>
             </div>
         </div>

@@ -111,9 +111,6 @@ function render_result(computation_id) {
             }
             $('#time_out').hide();
             $('#demo').hide();
-            let iframe = $('#if_structure');
-            // iframe.show();
-            iframe.attr('src', `/static/${computation_id}_VisualizePDBs.html`);
             molstar(`/static/${computation_id}_predicted_structure.pdb`)
         })
 }

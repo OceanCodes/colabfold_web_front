@@ -65,24 +65,23 @@ async function listener_status(computation_id) {
     if (yourFileExists) {
         console.log("PDB file already exist. Rendering")
         render_result(computation_id);
-    }
-    else if (yourFileExists === false) {
+    } else if (yourFileExists === false) {
         console.log("PDB file doesn't exist yet. Listening")
-            while (true) {
+        while (true) {
 
 
-        const response = await fetch(`/computation/${computation_id}/status`);
-        const data = await response.json();
+            const response = await fetch(`/computation/${computation_id}/status`);
+            const data = await response.json();
 
-        if (data.status === 'completed') {
-            console.log('Computation completed')
-            render_result(computation_id);
-            break;
+            if (data.status === 'completed') {
+                console.log('Computation completed')
+                render_result(computation_id);
+                break;
+            }
+
+            // Wait for 5 seconds before checking again
+            await new Promise(resolve => setTimeout(resolve, 1000));
         }
-
-        // Wait for 5 seconds before checking again
-        await new Promise(resolve => setTimeout(resolve, 1000));
-    }
     }
 }
 
@@ -91,13 +90,11 @@ function molstar(url) {
     let viewerInstance = new PDBeMolstarPlugin();
     let options = {
         customData: {
-            alphafoldView: true,
-            bgColor: {r: 255, g: 255, b: 255},
-            hideCanvasControls: ['selection', 'animation', 'controlToggle', 'controlInfo'],
-
             url: url,
             format: 'pdb',
-        }
+        },
+        bgColor: {r: 255, g: 255, b: 255},
+        hideControls: true,
     }
 
     let viewerContainer = document.getElementById('molstar');

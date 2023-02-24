@@ -46,6 +46,7 @@ function run() {
             console.log(`Computation id: ${data['computation_id']}`)
             history.pushState({}, null, `computation/${data['computation_id']}`);
             document.querySelector('#time_out').style.display = 'flex';
+            document.querySelector('#demo').play();
             document.querySelector('#predicting_overlay').style.display = 'flex';
             document.querySelector('#prediction_url').value = window.location.href;
             document.querySelector('#prediction').style.display = 'flex';

@@ -45,6 +45,7 @@ function run() {
             console.log(`Computation id: ${data['computation_id']}`)
             history.pushState({}, null, `computation/${data['computation_id']}`);
             document.querySelector('#time_out').style.display = 'flex';
+            document.querySelector('#predicting_overlay').style.display = 'flex';
             document.querySelector('#prediction_url').value = window.location.href;
             document.querySelector('#prediction').style.display = 'flex';
             listener_status(data['computation_id']).then(r => console.log(`Listening to computation ${data['computation_id']}`));
@@ -110,6 +111,7 @@ function render_result(computation_id) {
                 throw new Error("Can't download a result");
             }
             document.querySelector('#time_out').style.display = 'none';
+            document.querySelector('#predicting_overlay').style.display = 'none';
             document.querySelector('#demo').style.display = 'none';
             document.querySelector('#molstar').style.display = 'flex';
             molstar(`/static/${computation_id}_predicted_structure.pdb`)

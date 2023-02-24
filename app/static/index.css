@@ -37,3 +37,13 @@ iframe {
     transform: scale(1.04);
     opacity: 50%;
 }
+
+#predicting_overlay {
+    position: absolute;
+    top: 400px;
+    right: 300px;
+    font-size: 2rem;
+    color: #000;
+    opacity: 50%;
+    display: none;
+}

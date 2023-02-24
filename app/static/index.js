@@ -131,7 +131,6 @@ function listener_url() {
         console.log('No Computation ID found');
     } else {
         // Not sure about this part - simple .split('/') should work too
-        document.querySelector('#upload').style.display = 'none';
         const re = /\/computation\/([a-z0-9_]+(-[a-z0-9_]+)*)$/; // regular expression to match "/computation/" followed by one or more word characters at the end of the string
         const match = re.exec(url); // attempt to match the regular expression to the URL
         if (match) {

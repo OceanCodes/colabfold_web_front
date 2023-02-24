@@ -8,7 +8,7 @@ import json
 UPLOAD_FOLDER = './app/static'
 FOLDER_FASTA = f'{UPLOAD_FOLDER}/fasta'
 FOLDER_PDB = f'{UPLOAD_FOLDER}/pdb'
-ALLOWED_EXTENSIONS = {'fa', 'fasta'}
+ALLOWED_EXTENSIONS = {'fa', 'fasta', 'faa'}
 
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 100 * 1000

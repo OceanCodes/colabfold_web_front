@@ -10,13 +10,24 @@
 {% endblock %}
 
 {% block body %}
-<div class="container-fluid my-5 bg-white">
+<div class="container-fluid mb-5 bg-white">
+<nav class="navbar navbar-light mt-2">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img src="{{ url_for('static', filename='codeocean-logo.svg') }}" alt="CodeOcean Logo" width="200" height="19"
+                 class="d-inline-block align-text-top">
+        </a>
+        <form class="d-flex">
+            <a href="https://codeocean.com/request-a-demo/" class="btn btn-outline-primary rounded-pill">Request a demo</a>
+        </form>
+    </div>
+</nav>
     <div class="row mx-5 py-3">
         <a id="back_url" href="{{ url_for('index') }}"><h2>ColabFold: AlphaFold2 using MMseqs2</h2></a>
         <p>ColabFold speeds up predicting protein structures and complexes by using MMseqs2's quick homology search with
             AlphaFold2.</p>
     </div>
-    <div class="row m-5 pb-5">
+    <div class="row mx-5 pb-5">
         <div class="col-5">
             <div id="guide" class="row">
                 <p>Upload a protein sequence in FASTA format for structure
@@ -92,6 +103,12 @@
     </div>
 </div>
 {% block footer %}
+<footer class="footer mt-auto py-3">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
 {% endblock %}
 {% endblock %}
 

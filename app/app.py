@@ -6,10 +6,11 @@ from app.co_api import run_capsule, get_computation_state, get_result
 import json
 
 UPLOAD_FOLDER = './app/static'
+FOLDER_FASTA = f'{UPLOAD_FOLDER}/fasta'
+FOLDER_PDB = f'{UPLOAD_FOLDER}/pdb'
 ALLOWED_EXTENSIONS = {'fa', 'fasta'}
 
 app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 100 * 1000
 
 
@@ -39,7 +40,7 @@ def upload():
 
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
-        full_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        full_path = os.path.join(FOLDER_FASTA, filename)
         file.save(full_path)
         fasta = next(SeqIO.parse(full_path, "fasta"))
         return {'name': fasta.id, 'sequence': str(fasta.seq)}
@@ -61,8 +62,8 @@ def status(computation_id):
 
 @app.route('/computation/<computation_id>/result', methods=['GET'])
 def result(computation_id):
-    get_result(computation_id, f"{app.config['UPLOAD_FOLDER']}/{computation_id}_predicted_structure.pdb", 'predicted_structure.pdb')
-    return json.dumps({'success': True, 'path': f"{app.config['UPLOAD_FOLDER']}/{computation_id}_predicted_structure.pdb"}), 200, {'ContentType': 'application/json'}
+    get_result(computation_id, f"{FOLDER_PDB}/{computation_id}_predicted_structure.pdb", 'predicted_structure.pdb')
+    return json.dumps({'success': True, 'path': f"{FOLDER_PDB}/{computation_id}_predicted_structure.pdb"}), 200, {'ContentType': 'application/json'}
 
 
 @app.errorhandler(404)

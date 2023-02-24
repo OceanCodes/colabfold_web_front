@@ -1,6 +1,6 @@
 function upload() {
     const form_upload = document.querySelector('#form_upload');
-    const form_data = new FormData(form_upload[0]);
+    const form_data = new FormData(form_upload);
     fetch('/upload', {
         method: 'POST',
         body: form_data
@@ -12,12 +12,13 @@ function upload() {
             return response.json()
         })
         .then(response => {
+            console.log('uploaded')
             document.querySelector('#seq_name').value = response['name'];
             document.querySelector('#seq_content').value = response['sequence'];
             let bt_predict = document.querySelector('#bt_predict');
-            bt_predict.prop('disabled', false)
-            bt_predict.addClass('btn-primary')
-            bt_predict.removeClass('btn-secondary');
+            bt_predict.removeAttribute('disabled')
+            bt_predict.classList.add('btn-primary')
+            bt_predict.classList.remove('btn-secondary');
         })
         .catch(error => {
             console.error(error);
@@ -61,7 +62,7 @@ async function listener_status(computation_id) {
             .then(response => ({200: true, 404: false})[response.status])
             .catch(exception => undefined);
 
-    let yourFileExists = await fileExists(`/static/${computation_id}_predicted_structure.pdb`);
+    let yourFileExists = await fileExists(`/static/pdb/${computation_id}_predicted_structure.pdb`);
 
     if (yourFileExists) {
         console.log("PDB file already exist. Rendering")
@@ -114,7 +115,7 @@ function render_result(computation_id) {
             document.querySelector('#predicting_overlay').style.display = 'none';
             document.querySelector('#demo').style.display = 'none';
             document.querySelector('#molstar').style.display = 'flex';
-            molstar(`/static/${computation_id}_predicted_structure.pdb`)
+            molstar(`/static/pdb/${computation_id}_predicted_structure.pdb`)
         })
 }
 

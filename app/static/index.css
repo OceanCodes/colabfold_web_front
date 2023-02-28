@@ -23,8 +23,8 @@ iframe {
 }
 
 #molstar {
-    width: 800px;
-    height: 600px;
+    width: 90%;
+    height: 90%;
     position: relative;
 }
 
@@ -38,9 +38,6 @@ iframe {
 }
 
 #demo {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
     width: inherit;
     height: inherit;
     -o-filter: blur(15px);
@@ -51,11 +48,15 @@ iframe {
 }
 
 #predicting_overlay {
-    position: absolute;
-    top: 400px;
-    right: 300px;
+    /*position: absolute;*/
+    /*top: 400px;*/
+    /*right: 300px;*/
     font-size: 2rem;
     color: #000;
     opacity: 50%;
     display: none;
+}
+
+#btn_copy {
+    z-index: 0;
 }

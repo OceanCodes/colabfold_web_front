@@ -1,9 +1,11 @@
-import os
-from flask import Flask, flash, request, redirect, render_template, send_from_directory
-from werkzeug.utils import secure_filename
-from Bio import SeqIO
-from app.co_api import run_capsule, get_computation_state, get_result
 import json
+import os
+
+from Bio import SeqIO
+from flask import Flask, flash, request, redirect, render_template
+from werkzeug.utils import secure_filename
+
+from app.co_api import run_capsule, get_computation_state, get_result, create_asset
 
 UPLOAD_FOLDER = './app/static'
 FOLDER_FASTA = f'{UPLOAD_FOLDER}/fasta'
@@ -63,7 +65,15 @@ def status(computation_id):
 @app.route('/computation/<computation_id>/result', methods=['GET'])
 def result(computation_id):
     get_result(computation_id, f"{FOLDER_PDB}/{computation_id}_predicted_structure.pdb", 'predicted_structure.pdb')
-    return json.dumps({'success': True, 'path': f"{FOLDER_PDB}/{computation_id}_predicted_structure.pdb"}), 200, {'ContentType': 'application/json'}
+    return json.dumps({'success': True, 'path': f"{FOLDER_PDB}/{computation_id}_predicted_structure.pdb"}), 200, {
+        'ContentType': 'application/json'}
+
+
+@app.route('/computation/<computation_id>/create_asset', methods=['POST'])
+def asset(computation_id):
+    name = request.json.get('name')
+    asset_id = create_asset(computation_id, name)['id']
+    return json.dumps({'success': True, 'asset_id': asset_id}), 200, {'ContentType': 'application/json'}
 
 
 @app.errorhandler(404)

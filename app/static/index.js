@@ -17,8 +17,6 @@ function upload() {
             document.querySelector('#seq_content').value = response['sequence'];
             let bt_predict = document.querySelector('#bt_predict');
             bt_predict.removeAttribute('disabled')
-            bt_predict.classList.add('btn-primary')
-            bt_predict.classList.remove('btn-secondary');
         })
         .catch(error => {
             console.error(error);
@@ -100,8 +98,29 @@ function molstar(url) {
         hideControls: true,
     }
 
-    let viewerContainer = document.getElementById('molstar');
+    let viewerContainer = document.querySelector('#molstar');
     viewerInstance.render(viewerContainer, options);
+}
+
+function download_uri(uri, filename) {
+    let downloadAnchorNode = document.createElement('a');
+    downloadAnchorNode.setAttribute("href", uri);
+    downloadAnchorNode.setAttribute("download", filename);
+    downloadAnchorNode.click();
+    downloadAnchorNode.remove();
+}
+
+function create_asset(computation_id) {
+    let seq_name = document.querySelector('#seq_name').value;
+    fetch(`/computation/${computation_id}/result`, {
+        method: 'POST',
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Can't make an asset");
+            }
+
+        })
 }
 
 function render_result(computation_id) {
@@ -116,17 +135,27 @@ function render_result(computation_id) {
             document.querySelector('#predicting_overlay').style.display = 'none';
             document.querySelector('#demo').style.display = 'none';
             document.querySelector('#molstar').style.display = 'flex';
-            molstar(`/static/pdb/${computation_id}_predicted_structure.pdb`)
+            molstar(`/static/pdb/${computation_id}_predicted_structure.pdb`);
+            document.querySelector('#bt_download_pdb').onclick = () => {
+                return download_uri(`/static/pdb/${computation_id}_predicted_structure.pdb`, `${computation_id}_predicted_structure.pdb`)
+            };
+            document.querySelector('#bt_create_asset').onclick = () => {
+                return create_asset(computation_id);
+            }
+            let bts_results = document.querySelector('#bts_results');
+            bts_results.classList.remove('d-none');
+            bts_results.classList.add('d-flex');
         })
 }
 
 function copy_url() {
 // Copies the URL to the clipboard
- let url = document.getElementById("prediction_url");
-  url.select();
-  url.setSelectionRange(0, 99999);
-  navigator.clipboard.writeText(url.value);
+    let url = document.querySelector("#prediction_url");
+    url.select();
+    url.setSelectionRange(0, 99999);
+    navigator.clipboard.writeText(url.value);
 }
+
 
 function listener_url() {
     const url = window.location.href;

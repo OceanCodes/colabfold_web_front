@@ -71,7 +71,7 @@ def result(computation_id):
 
 @app.route('/computation/<computation_id>/create_asset', methods=['POST'])
 def asset(computation_id):
-    name = request.json.get('name')
+    name = request.json.get('name') or computation_id
     asset_id = create_asset(computation_id, name)['id']
     return json.dumps({'success': True, 'asset_id': asset_id}), 200, {'ContentType': 'application/json'}
 

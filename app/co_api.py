@@ -46,4 +46,4 @@ def create_asset(computation_id, asset_name, tags=None):
         tags = ["predicted structure", "colabfold"]
 
     asset = co_client.register_result_as_data_asset(computation_id, asset_name, asset_description="", tags=tags)
-    return asset
+    return asset.json()

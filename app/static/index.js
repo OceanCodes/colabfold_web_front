@@ -112,8 +112,12 @@ function download_uri(uri, filename) {
 
 function create_asset(computation_id) {
     let seq_name = document.querySelector('#seq_name').value;
-    fetch(`/computation/${computation_id}/result`, {
+    fetch(`/computation/${computation_id}/create_asset`, {
         method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({name: seq_name})
     })
         .then(response => {
             if (!response.ok) {

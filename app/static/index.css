@@ -47,15 +47,17 @@ iframe {
     opacity: 50%;
 }
 
-#predicting_overlay {
-    /*position: absolute;*/
-    /*top: 400px;*/
-    /*right: 300px;*/
+#overlay_predicting {
     font-size: 2rem;
     color: #000;
     opacity: 50%;
     display: none;
 }
+
+#progress_predicting {
+    display: none;
+}
+
 
 #btn_copy {
     z-index: 0;

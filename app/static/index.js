@@ -45,7 +45,8 @@ function run() {
             history.pushState({}, null, `computation/${data['computation_id']}`);
             document.querySelector('#time_out').style.display = 'flex';
             document.querySelector('#demo').play();
-            document.querySelector('#predicting_overlay').style.display = 'flex';
+            document.querySelector('#overlay_predicting').style.display = 'flex';
+            document.querySelector('#progress_predicting').style.display = 'flex';
             document.querySelector('#prediction_url').value = window.location.href;
             document.querySelector('#prediction').style.display = 'flex';
             listener_status(data['computation_id']).then(r => console.log(`Listening to computation ${data['computation_id']}`));
@@ -121,9 +122,12 @@ function create_asset(computation_id) {
     })
         .then(response => {
             if (!response.ok) {
-                throw new Error("Can't make an asset");
+                throw new Error("Can't make a data asset");
             }
-
+            let bt_creat_asset = document.querySelector('#bt_create_asset');
+            bt_creat_asset.textContent = "<i class='fas fa-database' title='Create Data Asset from results' aria-hidden='true'></i>Data asset created";
+            bt_creat_asset.classList.remove('btn-outline-primary');
+            bt_creat_asset.classList.add('btn-outline-success');
         })
 }
 
@@ -136,7 +140,8 @@ function render_result(computation_id) {
                 throw new Error("Can't download a result");
             }
             document.querySelector('#time_out').style.display = 'none';
-            document.querySelector('#predicting_overlay').style.display = 'none';
+            document.querySelector('#overlay_predicting').style.display = 'none';
+            document.querySelector('#progress_predicting').style.display = 'none';
             document.querySelector('#demo').style.display = 'none';
             document.querySelector('#molstar').style.display = 'flex';
             molstar(`/static/pdb/${computation_id}_predicted_structure.pdb`);

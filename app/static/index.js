@@ -45,8 +45,8 @@ function run() {
             history.pushState({}, null, `computation/${data['computation_id']}`);
             document.querySelector('#time_out').style.display = 'flex';
             document.querySelector('#demo').play();
-            document.querySelector('#overlay_predicting').style.display = 'flex';
-            document.querySelector('#progress_predicting').style.display = 'flex';
+            // document.querySelector('#overlay_predicting').style.display = 'flex';
+            document.querySelector('#progress_predicting').classList.remove('d-none');
             start_progress_bar();
             document.querySelector('#prediction_url').value = window.location.href;
             document.querySelector('#prediction').style.display = 'flex';
@@ -181,10 +181,11 @@ function render_result(computation_id) {
                 throw new Error("Can't download a result");
             }
             document.querySelector('#time_out').style.display = 'none';
-            document.querySelector('#overlay_predicting').style.display = 'none';
-            document.querySelector('#progress_predicting').style.display = 'none';
+            // document.querySelector('#overlay_predicting').style.display = 'none';
+            document.querySelector('#progress_predicting').classList.add('d-none');
             document.querySelector('#demo').style.display = 'none';
-            document.querySelector('#molstar').style.display = 'flex';
+            document.querySelector('#wrapper_molstar').classList.remove('d-none');
+            document.querySelector('#wrapper_molstar').classList.add('d-flex');
             molstar(`/static/pdb/${computation_id}_predicted_structure.pdb`);
             document.querySelector('#bt_download_pdb').onclick = () => {
                 return download_uri(`/static/pdb/${computation_id}_predicted_structure.pdb`, `${computation_id}_predicted_structure.pdb`)

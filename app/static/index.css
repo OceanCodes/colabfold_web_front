@@ -38,9 +38,8 @@ iframe {
 }
 
 #demo {
-    display: none;
-    width: inherit;
-    height: inherit;
+    width: 600px;
+    /*height: inherit;*/
     -o-filter: blur(15px);
     filter: blur(15px);
     object-fit: cover;
@@ -48,16 +47,16 @@ iframe {
     opacity: 50%;
 }
 
-#overlay_predicting {
-    font-size: 2rem;
-    color: #000;
-    opacity: 50%;
-    display: none;
-}
-
-/*#progress_predicting {*/
+/*#overlay_predicting {*/
+/*    font-size: 2rem;*/
+/*    color: #000;*/
+/*    opacity: 50%;*/
 /*    display: none;*/
 /*}*/
+
+#progress_predicting {
+    z-index: 1;
+}
 
 
 #btn_copy {

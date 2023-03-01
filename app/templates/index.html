@@ -97,9 +97,9 @@
         </div>
         <div class="col-7 position-relative">
             <div class="row">
-                <div class="col-12 d-flex">
-                    <p id="overlay_predicting" class="position-absolute top-50 start-50 translate-middle">Predicting the
-                        structure</p>
+                <div class="col-12 d-flex" id="wrapper_demo">
+                    <!--                    <p id="overlay_predicting" class="position-absolute top-50 start-50 translate-middle">Predicting the-->
+                    <!--                        structure</p>-->
                     <div id="progress_predicting" class="progress position-absolute top-50 start-50 translate-middle">
                         <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
                              aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
@@ -111,22 +111,24 @@
                     </video>
                 </div>
                 <div class="col-12 d-none" id="wrapper_molstar">
-                    <div id="molstar" class="position-absolute top-50 start-50 translate-middle"
-                         style="display: none"></div>
+                    <div class="row">
+                        <div id="molstar" class="position-absolute top-50 start-50 translate-middle"></div>
+                    </div>
+                    <div class="row">
+                        <div id="bts_results" class="d-none position-absolute bottom-0 end-0">
+                            <button id="bt_download_pdb" class="btn btn-sm btn-outline-primary border-0" onclick="">
+                                <i class="fas fa-download" title="Download PDB" aria-hidden="true"></i>
+                                PDB
+                            </button>
+                            <button id="bt_create_asset" class="btn btn-sm btn-outline-primary border-0" onclick="">
+                                <i class="fas fa-database" title="Create a data asset from results"
+                                   aria-hidden="true"></i>
+                                Create a data asset from results
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="row">
-        <div id="bts_results" class="d-none justify-content-end">
-            <button id="bt_download_pdb" class="btn btn-sm btn-outline-primary border-0" onclick="">
-                <i class="fas fa-download" title="Download PDB" aria-hidden="true"></i>
-                PDB
-            </button>
-            <button id="bt_create_asset" class="btn btn-sm btn-outline-primary border-0" onclick="">
-                <i class="fas fa-database" title="Create a data asset from results" aria-hidden="true"></i>
-                Create a data asset from results
-            </button>
         </div>
     </div>
 </div>

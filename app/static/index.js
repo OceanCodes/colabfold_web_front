@@ -47,6 +47,7 @@ function run() {
             document.querySelector('#demo').play();
             document.querySelector('#overlay_predicting').style.display = 'flex';
             document.querySelector('#progress_predicting').style.display = 'flex';
+            start_progress_bar();
             document.querySelector('#prediction_url').value = window.location.href;
             document.querySelector('#prediction').style.display = 'flex';
             listener_status(data['computation_id']).then(r => console.log(`Listening to computation ${data['computation_id']}`));
@@ -54,6 +55,43 @@ function run() {
         .catch(error => {
             console.error(error);
         });
+}
+
+function reset_progress_bar() {
+    let progress_bar = document.querySelector('.progress-bar');
+    progress_bar.style.width = '0%';
+    progress_bar.setAttribute('aria-valuenow', 0);
+    progress_bar.textContent = '0%';
+}
+
+function start_progress_bar() {
+    // It’s challenging to estimate from the input how long the prediction would take
+    // So we show a progress bar
+    let current_progress = 0;
+    let step = 0.01;
+    let timeout = 500;
+    let progress_bar = document.querySelector('.progress-bar')
+    let interval = setInterval(function () {
+        current_progress += step;
+        let progress = (Math.round(Math.atan(current_progress) / (Math.PI / 2) * 100 * 1000) / 1000).toPrecision(4);
+        progress_bar.style.width = `${progress}%`;
+        progress_bar.setAttribute('aria-valuenow', progress);
+        progress_bar.textContent = `${progress}%`;
+        if (progress >= 100) {
+            clearInterval(interval);
+        } else if (progress >= 70) {
+            // In case the protein is long
+            step = 0.01;
+            timeout = 3000;
+        } else if (progress >= 30) {
+            // Computation
+            step = 0.01;
+            timeout = 1000;
+        } else if (progress >= 0) {
+            // Starting a capsule
+            step = 0.01;
+        }
+    }, timeout);
 }
 
 async function listener_status(computation_id) {

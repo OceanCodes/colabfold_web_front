@@ -69,27 +69,28 @@ function start_progress_bar() {
     // So we show a progress bar
     let current_progress = 0;
     let step = 0.01;
-    let timeout = 500;
+    let timeout = 100;
     let progress_bar = document.querySelector('.progress-bar')
     let interval = setInterval(function () {
         current_progress += step;
         let progress = (Math.round(Math.atan(current_progress) / (Math.PI / 2) * 100 * 1000) / 1000).toPrecision(4);
         progress_bar.style.width = `${progress}%`;
         progress_bar.setAttribute('aria-valuenow', progress);
-        progress_bar.textContent = `${progress}%`;
         if (progress >= 100) {
             clearInterval(interval);
-        } else if (progress >= 70) {
+        } else if (progress >= 50) {
             // In case the protein is long
-            step = 0.01;
             timeout = 3000;
         } else if (progress >= 30) {
             // Computation
-            step = 0.01;
             timeout = 1000;
+            progress_bar.textContent =  'Running colabfold 1.5.1'
+        } else if (progress >= 15) {
+            step = 0.001;
         } else if (progress >= 0) {
             // Starting a capsule
-            step = 0.01;
+            step = 0.005;
+            progress_bar.textContent = 'Starting the capsule';
         }
     }, timeout);
 }

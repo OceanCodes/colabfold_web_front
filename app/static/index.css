@@ -38,6 +38,7 @@ iframe {
 }
 
 #demo {
+    display: none;
     width: inherit;
     height: inherit;
     -o-filter: blur(15px);
@@ -54,9 +55,9 @@ iframe {
     display: none;
 }
 
-#progress_predicting {
-    display: none;
-}
+/*#progress_predicting {*/
+/*    display: none;*/
+/*}*/
 
 
 #btn_copy {

@@ -84,7 +84,7 @@ function start_progress_bar() {
         } else if (progress >= 30) {
             // Computation
             timeout = 1000;
-            progress_bar.textContent =  'Running colabfold 1.5.1'
+            progress_bar.textContent = 'Running colabfold 1.5.1'
         } else if (progress >= 15) {
             step = 0.001;
         } else if (progress >= 0) {
@@ -152,6 +152,9 @@ function download_uri(uri, filename) {
 
 function create_asset(computation_id) {
     let seq_name = document.querySelector('#seq_name').value;
+    let bt_creat_asset = document.querySelector('#bt_create_asset');
+    bt_creat_asset.innerHTML = "<div class='spinner-border text-primary' role='status' style='height: 14px; width: 14px'></div> Creating the data asset"
+    bt_creat_asset.setAttribute('disabled', 'true');
     fetch(`/computation/${computation_id}/create_asset`, {
         method: 'POST',
         headers: {
@@ -163,8 +166,7 @@ function create_asset(computation_id) {
             if (!response.ok) {
                 throw new Error("Can't make a data asset");
             }
-            let bt_creat_asset = document.querySelector('#bt_create_asset');
-            bt_creat_asset.textContent = "<i class='fas fa-database' title='Create Data Asset from results' aria-hidden='true'></i>Data asset created";
+            bt_creat_asset.innerHTML = "<i class='fas fa-database' title='Create Data Asset from results' aria-hidden='true'></i> Data asset created";
             bt_creat_asset.classList.remove('btn-outline-primary');
             bt_creat_asset.classList.add('btn-outline-success');
         })

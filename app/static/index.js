@@ -149,12 +149,12 @@ function download_uri(uri, filename) {
     downloadAnchorNode.remove();
 }
 
-function create_asset(computation_id) {
+async function create_asset(computation_id) {
     let seq_name = document.querySelector('#text_asset_name').value;
     let bt_creat_asset = document.querySelector('#bt_create_asset');
     bt_creat_asset.innerHTML = "<div class='spinner-border text-primary' role='status' style='height: 14px; width: 14px'></div> Creating the data asset"
     bt_creat_asset.setAttribute('disabled', 'true');
-    fetch(`/computation/${computation_id}/create_asset`, {
+    const response = await fetch(`/computation/${computation_id}/create_asset`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -168,7 +168,11 @@ function create_asset(computation_id) {
             bt_creat_asset.innerHTML = "<i class='fas fa-database' title='Create Data Asset from results' aria-hidden='true'></i> Data asset created";
             bt_creat_asset.classList.remove('btn-outline-primary');
             bt_creat_asset.classList.add('btn-outline-success');
+            return response.json();
         })
+    const asset_id = await response['asset_id'];
+    document.querySelector('#inp')
+    console.log(`https://acmecorp-demo.codeocean.com/data-assets/${asset_id}/`)
 }
 
 function render_result(computation_id) {

@@ -5,7 +5,7 @@ from Bio import SeqIO
 from flask import Flask, flash, request, redirect, render_template
 from werkzeug.utils import secure_filename
 
-from app.co_api import run_capsule, get_computation_state, get_result, create_asset
+from app.co_api import run_capsule, get_computation_state, get_result, create_asset, get_capsule_uid
 
 UPLOAD_FOLDER = './app/static'
 FOLDER_FASTA = f'{UPLOAD_FOLDER}/fasta'
@@ -24,7 +24,7 @@ def allowed_file(filename):
 @app.route('/', methods=['GET'])
 @app.route('/computation/<computation_id>')
 def index(computation_id=''):
-    return render_template('index.html')
+    return render_template('index.html', meta=get_capsule_uid())
 
 
 @app.route('/upload', methods=['POST'])

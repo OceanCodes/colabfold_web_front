@@ -11,10 +11,9 @@
 
 {% block body %}
 <div class="container-fluid mb-5 bg-white">
-    <nav class="navbar navbar-light mt-2">
-        <div class="container-fluid sticky-top">
-
-            <a class="navbar-brand" href="https://codeocean.com/">
+    <nav class="navbar navbar-light mt-2 sticky-top bg-white">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="https://codeocean.com/" target="_blank">
                 <img src="{{ url_for('static', filename='codeocean-logo.svg') }}" alt="CodeOcean Logo" width="200"
                      height="19"
                      class="d-inline-block align-text-top">
@@ -86,8 +85,8 @@
                 </div>
                 <div class="col-9">
                     <div class="input-group mb-3">
-                        <input id="prediction_url" type="text" class="form-control" placeholder="Recipient's username"
-                               aria-label="Recipient's username" aria-describedby="button-addon2">
+                        <input id="prediction_url" type="text" class="form-control" placeholder=""
+                               aria-label="Prediction URL" aria-describedby="button-addon2">
                         <button id="bt_copy" class="btn btn-sm btn-outline-primary" type="button"
                                 onclick="copy_url();"><i
                                 class="far fa-copy"></i></button>
@@ -133,6 +132,7 @@
                                 <input id="text_asset_name" type="text" class="form-control"
                                        placeholder="ColabFold_predicition_asset"
                                        aria-label="Data asset name" aria-describedby="button-addon1">
+                                <a id="link_asset" href="" target="_blank"></a>
                             </div>
                         </div>
                     </div>
@@ -146,6 +146,12 @@
 <div class="mt-auto py-3 fixed-bottom">
     <div class="container">
         <div class="row">
+            <div class="col-4">
+                <a href="https://acmecorp-demo.codeocean.com/capsule/{{ meta.slug }}/tree" class="small text-white" target="_blank">{{ meta.name }}</a>
+            </div>
+            <div class="col-8">
+                <a href="https://www.nature.com/articles/s41592-022-01488-1" class="small text-white" target="_blank">Mirdita, M., Schütze, K., Moriwaki, Y. et al. ColabFold: making protein folding accessible to all. Nat Methods 19, 679–682 (2022).</a>
+            </div>
         </div>
     </div>
 </div>

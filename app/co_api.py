@@ -41,6 +41,11 @@ def get_result(computation_id, fp, path_to_file):
     open(fp, 'wb').write(response.content)
 
 
+def get_capsule_uid():
+    capsule_meta = co_client.get_capsule(capsule_id).json()
+    return {'name': capsule_meta['name'], 'slug': capsule_meta['slug']}
+
+
 def create_asset(computation_id, asset_name, tags=None):
     if tags is None:
         tags = ["predicted structure", "colabfold"]

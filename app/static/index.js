@@ -150,7 +150,7 @@ function download_uri(uri, filename) {
 }
 
 function create_asset(computation_id) {
-    let seq_name = document.querySelector('#seq_name').value;
+    let seq_name = document.querySelector('#text_asset_name').value;
     let bt_creat_asset = document.querySelector('#bt_create_asset');
     bt_creat_asset.innerHTML = "<div class='spinner-border text-primary' role='status' style='height: 14px; width: 14px'></div> Creating the data asset"
     bt_creat_asset.setAttribute('disabled', 'true');

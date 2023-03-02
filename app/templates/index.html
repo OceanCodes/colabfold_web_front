@@ -12,7 +12,8 @@
 {% block body %}
 <div class="container-fluid mb-5 bg-white">
     <nav class="navbar navbar-light mt-2">
-        <div class="container-fluid">
+        <div class="container-fluid sticky-top">
+
             <a class="navbar-brand" href="https://codeocean.com/">
                 <img src="{{ url_for('static', filename='codeocean-logo.svg') }}" alt="CodeOcean Logo" width="200"
                      height="19"
@@ -114,31 +115,40 @@
                     <div class="row">
                         <div id="molstar" class="position-absolute top-50 start-50 translate-middle"></div>
                     </div>
-                    <div class="row">
-                        <div id="bts_results" class="d-none position-absolute bottom-0 end-0">
+
+                    <div id="bts_results" class="row d-none position-absolute bottom-0 end-0">
+                        <div class="col-2">
                             <button id="bt_download_pdb" class="btn btn-sm btn-outline-primary border-0" onclick="">
                                 <i class="fas fa-download" title="Download PDB" aria-hidden="true"></i>
                                 PDB
                             </button>
-                            <button id="bt_create_asset" class="btn btn-sm btn-outline-primary border-0" onclick="">
-                                <i class="fas fa-database" title="Create a data asset from results"
-                                   aria-hidden="true"></i>
-                                Create a data asset from results
-                            </button>
+                        </div>
+                        <div class="col-10">
+                            <div class="input-group input-group-sm">
+                                <button id="bt_create_asset" class="btn btn-sm btn-outline-primary border-0" onclick="">
+                                    <i class="fas fa-database" title="Create a data asset from results"
+                                       aria-hidden="true"></i>
+                                    Create a data asset from results
+                                </button>
+                                <input id="text_asset_name" type="text" class="form-control"
+                                       placeholder="ColabFold_predicition_asset"
+                                       aria-label="Data asset name" aria-describedby="button-addon1">
+                            </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
     </div>
 </div>
 {% block footer %}
-<footer class="footer mt-auto py-3">
+<div class="mt-auto py-3 fixed-bottom">
     <div class="container">
         <div class="row">
         </div>
     </div>
-</footer>
+</div>
 {% endblock %}
 {% endblock %}
 

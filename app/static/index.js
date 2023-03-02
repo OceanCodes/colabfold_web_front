@@ -109,13 +109,12 @@ async function listener_status(computation_id) {
     } else if (yourFileExists === false) {
         console.log("PDB file doesn't exist yet. Listening")
         while (true) {
-
-
             const response = await fetch(`/computation/${computation_id}/status`);
             const data = await response.json();
 
             if (data.status === 'completed') {
                 console.log('Computation completed')
+                // TODO What happens here?
                 render_result(computation_id);
                 break;
             }

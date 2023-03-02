@@ -56,6 +56,8 @@ iframe {
 
 #progress_predicting {
     z-index: 1;
+    height: 1.7rem;
+    width: 75%;
 }
 
 

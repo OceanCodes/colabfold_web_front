@@ -143,13 +143,14 @@
 <div class="mt-auto py-3 fixed-bottom">
     <div class="container">
         <div class="row">
-            <div class="col-4">
+            <div class="col-5">
                 <a href="https://acmecorp-demo.codeocean.com/capsule/{{ meta.slug }}/tree" class="small text-white"
-                   target="_blank">{{ meta.name }}</a>
+                   target="_blank"><img src=" {{ url_for('static', filename='co-logo-white.svg') }}" width="auto"
+                                        height="12px" alt="CO Logo">{{ meta.name }}</a>
             </div>
-            <div class="col-8">
+            <div class="col-7">
                 <a href="https://www.nature.com/articles/s41592-022-01488-1" class="small text-white" target="_blank">Mirdita,
-                    M., Schütze, K., Moriwaki, Y. et al. ColabFold: making protein folding accessible to all. Nat
+                    M., Schütze, K., Moriwaki, Y. et al. ColabFold: making protein folding accessible to all.<br/>Nature
                     Methods 19, 679–682 (2022).</a>
             </div>
         </div>

@@ -46,7 +46,7 @@ function run() {
             document.querySelector('#time_out').style.display = 'flex';
             document.querySelector('#demo').play();
             // document.querySelector('#overlay_predicting').style.display = 'flex';
-            document.querySelector('#progress_predicting').classList.remove('d-none');
+            document.querySelector('#progress_predicting').classList.toggle('d-none');
             start_progress_bar();
             document.querySelector('#prediction_url').value = window.location.href;
             document.querySelector('#prediction').style.display = 'flex';
@@ -185,10 +185,9 @@ function render_result(computation_id) {
             }
             document.querySelector('#time_out').style.display = 'none';
             // document.querySelector('#overlay_predicting').style.display = 'none';
-            document.querySelector('#progress_predicting').classList.add('d-none');
+            document.querySelector('#progress_predicting').classList.toggle('d-none');
             document.querySelector('#demo').style.display = 'none';
-            document.querySelector('#wrapper_molstar').classList.remove('d-none');
-            document.querySelector('#wrapper_molstar').classList.add('d-flex');
+            document.querySelector('#wrapper_molstar').classList.toggle('d-none');
             molstar(`/static/pdb/${computation_id}_predicted_structure.pdb`);
             document.querySelector('#bt_download_pdb').onclick = () => {
                 return download_uri(`/static/pdb/${computation_id}_predicted_structure.pdb`, `${computation_id}_predicted_structure.pdb`)
@@ -197,8 +196,7 @@ function render_result(computation_id) {
                 return create_asset(computation_id);
             }
             let bts_results = document.querySelector('#bts_results');
-            bts_results.classList.remove('d-none');
-            bts_results.classList.add('d-flex');
+            bts_results.classList.toggle('d-none');
         })
 }
 

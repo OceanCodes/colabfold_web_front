@@ -3,5 +3,5 @@
 .idea
 __pycache__
 venv
-app/static/pdb/*.pdb
-app/static/fasta/*.fasta
+*.pdb
+*.fasta

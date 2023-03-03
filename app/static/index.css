@@ -1,10 +1,5 @@
-html {
-    position: relative;
-    min-height: 100%;
-}
-
-body {
-    margin-bottom: 60px; /* Margin bottom by footer height */
+h2 {
+    font-weight: 200;
 }
 
 .fixed-bottom {
@@ -13,28 +8,19 @@ body {
     background-color: #00a1e0;
 }
 
-
 textarea {
     resize: none;
-}
-
-iframe {
-    border-color: #e0e0e0;
 }
 
 #molstar {
     width: 90%;
     height: 90%;
-    position: relative;
+    /*position: relative;*/
 }
 
 #back_url {
     color: black;
     text-decoration: none;
-}
-
-h2 {
-    font-weight: 200;
 }
 
 #back_url:hover {
@@ -51,23 +37,11 @@ h2 {
     opacity: 50%;
 }
 
-/*#overlay_predicting {*/
-/*    font-size: 2rem;*/
-/*    color: #000;*/
-/*    opacity: 50%;*/
-/*    display: none;*/
-/*}*/
-
 #progress_predicting {
     z-index: 1;
     height: 1.7rem;
 }
 
-
-#btn_copy {
+#bt_copy {
     z-index: 0;
 }
-
-/*#bts_results {*/
-/*    height: 2%;*/
-/*}*/

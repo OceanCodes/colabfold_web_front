@@ -1,5 +1,7 @@
+const $ = document.querySelector.bind(document)
+
 function upload() {
-    const form_upload = document.querySelector('#form_upload');
+    const form_upload = $('#form_upload');
     const form_data = new FormData(form_upload);
     fetch('/upload', {
         method: 'POST',
@@ -13,9 +15,9 @@ function upload() {
         })
         .then(response => {
             console.log('uploaded')
-            document.querySelector('#seq_name').value = response['name'];
-            document.querySelector('#seq_content').value = response['sequence'];
-            let bt_predict = document.querySelector('#bt_predict');
+            $('#seq_name').value = response['name'];
+            $('#seq_content').value = response['sequence'];
+            let bt_predict = $('#bt_predict');
             bt_predict.removeAttribute('disabled')
         })
         .catch(error => {
@@ -24,8 +26,8 @@ function upload() {
 }
 
 function run() {
-    const name = document.querySelector('#seq_name').value;
-    const sequence = document.querySelector('#seq_content').value;
+    const name = $('#seq_name').value;
+    const sequence = $('#seq_content').value;
 
     fetch('/run', {
         method: 'POST',
@@ -43,13 +45,13 @@ function run() {
         .then(data => {
             console.log(`Computation id: ${data['computation_id']}`)
             history.pushState({}, null, `computation/${data['computation_id']}`);
-            document.querySelector('#time_out').style.display = 'flex';
-            document.querySelector('#demo').play();
-            // document.querySelector('#overlay_predicting').style.display = 'flex';
-            document.querySelector('#progress_predicting').classList.toggle('d-none');
+            $('#time_out').style.display = 'flex';
+            $('#demo').play();
+            // $('#overlay_predicting').style.display = 'flex';
+            $('#progress_predicting').classList.toggle('d-none');
             start_progress_bar();
-            document.querySelector('#prediction_url').value = window.location.href;
-            document.querySelector('#prediction').style.display = 'flex';
+            $('#prediction_url').value = window.location.href;
+            $('#prediction').style.display = 'flex';
             listener_status(data['computation_id']).then(r => console.log(`Listening to computation ${data['computation_id']}`));
         })
         .catch(error => {
@@ -58,7 +60,7 @@ function run() {
 }
 
 function reset_progress_bar() {
-    let progress_bar = document.querySelector('.progress-bar');
+    let progress_bar = $('.progress-bar');
     progress_bar.style.width = '0%';
     progress_bar.setAttribute('aria-valuenow', 0);
     progress_bar.textContent = '0%';
@@ -70,7 +72,7 @@ function start_progress_bar() {
     let current_progress = 0;
     let step = 0.01;
     let timeout = 100;
-    let progress_bar = document.querySelector('.progress-bar')
+    let progress_bar = $('.progress-bar')
     let interval = setInterval(function () {
         current_progress += step;
         let progress = (Math.round(Math.atan(current_progress) / (Math.PI / 2) * 100 * 1000) / 1000).toPrecision(4);
@@ -137,7 +139,7 @@ function molstar(url) {
         hideControls: true,
     }
 
-    let viewerContainer = document.querySelector('#molstar');
+    let viewerContainer = $('#molstar');
     viewerInstance.render(viewerContainer, options);
 }
 
@@ -150,8 +152,8 @@ function download_uri(uri, filename) {
 }
 
 async function create_asset(computation_id) {
-    let seq_name = document.querySelector('#text_asset_name').value;
-    let bt_creat_asset = document.querySelector('#bt_create_asset');
+    let seq_name = $('#text_asset_name').value;
+    let bt_creat_asset = $('#bt_create_asset');
     bt_creat_asset.innerHTML = "<div class='spinner-border text-primary' role='status' style='height: 14px; width: 14px'></div> Creating the data asset"
     bt_creat_asset.setAttribute('disabled', 'true');
     const response = await fetch(`/computation/${computation_id}/create_asset`, {
@@ -171,7 +173,7 @@ async function create_asset(computation_id) {
             return response.json();
         })
     const asset_id = await response['asset_id'];
-    document.querySelector('#inp')
+    $('#inp')
     console.log(`https://acmecorp-demo.codeocean.com/data-assets/${asset_id}/`)
 }
 
@@ -183,26 +185,26 @@ function render_result(computation_id) {
             if (!response.ok) {
                 throw new Error("Can't download a result");
             }
-            document.querySelector('#time_out').style.display = 'none';
-            // document.querySelector('#overlay_predicting').style.display = 'none';
-            document.querySelector('#progress_predicting').classList.toggle('d-none');
-            document.querySelector('#demo').style.display = 'none';
-            document.querySelector('#wrapper_molstar').classList.toggle('d-none');
+            $('#time_out').style.display = 'none';
+            // $('#overlay_predicting').style.display = 'none';
+            $('#progress_predicting').classList.toggle('d-none');
+            $('#demo').style.display = 'none';
+            $('#wrapper_molstar').classList.toggle('d-none');
             molstar(`/static/pdb/${computation_id}_predicted_structure.pdb`);
-            document.querySelector('#bt_download_pdb').onclick = () => {
+            $('#bt_download_pdb').onclick = () => {
                 return download_uri(`/static/pdb/${computation_id}_predicted_structure.pdb`, `${computation_id}_predicted_structure.pdb`)
             };
-            document.querySelector('#bt_create_asset').onclick = () => {
+            $('#bt_create_asset').onclick = () => {
                 return create_asset(computation_id);
             }
-            let bts_results = document.querySelector('#bts_results');
+            let bts_results = $('#bts_results');
             bts_results.classList.toggle('d-none');
         })
 }
 
 function copy_url() {
 // Copies the URL to the clipboard
-    let url = document.querySelector("#prediction_url");
+    let url = $("#prediction_url");
     url.select();
     url.setSelectionRange(0, 99999);
     navigator.clipboard.writeText(url.value);
@@ -221,9 +223,9 @@ function listener_url() {
         if (match) {
             const computation_id = match[0].split('/')[2]; // extract the matched ID from the regular expression match
             console.log(`Computation ID found: ${computation_id}`);
-            // document.querySelector('#time_out').style.display = 'block';
-            document.querySelector('#prediction_url').value = window.location.href;
-            document.querySelector('#prediction').style.display = 'flex';
+            // $('#time_out').style.display = 'block';
+            $('#prediction_url').value = window.location.href;
+            $('#prediction').style.display = 'flex';
             listener_status(computation_id).then(r => console.log('Checking the computation status'));
         } else {
             console.log('No Computation ID found');

@@ -15,9 +15,10 @@ textarea {
 #molstar {
     min-width: 800px;
     width: auto;
-    min-height: 600px;
+    min-height: 586px;
     height: auto;
     position: relative;
+    margin-left: 0.8rem;
 }
 
 .text-co {

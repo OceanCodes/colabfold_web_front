@@ -18,12 +18,14 @@
                      height="19"
                      class="d-inline-block align-text-top">
             </a>
-                            <a href="mailto:maxim@codeocean.com?subject=Requesting%20Free%20Access%20to%20AlphaFold%20Demo" class="btn-outline-primary btn-co"
-                   target="_blank">Get Free Access</a>
-<div class="input-group w-25">
-  <input type="text" class="form-control text-co" placeholder="Free access code" aria-label="Free access code" aria-describedby="button-addon2">
-  <button class="btn btn-co" type="button" id="button-addon2">Activate</button>
-</div>
+            <a href="mailto:maxim@codeocean.com?subject=Requesting%20Free%20Access%20to%20AlphaFold%20Demo"
+               class="btn-outline-primary btn-co"
+               target="_blank">Get Free Access</a>
+            <div class="input-group w-25">
+                <input type="text" class="form-control text-co" placeholder="Free access code"
+                       aria-label="Free access code" aria-describedby="button-addon2">
+                <button class="btn btn-co" type="button" id="button-addon2">Activate</button>
+            </div>
         </div>
     </nav>
     <div class="row mx-5 py-3">
@@ -45,7 +47,7 @@
                 <div class="col-9">
                     <form id="form_upload" enctype=multipart/form-data>
                         <input id="file_fasta" type=file name=file>
-                        <button id="bt_upload" class="btn btn-sm btn-outline-primary" onclick="upload();"
+                        <button id="bt_upload" class="btn btn-outline-primary px-4" onclick="upload();"
                                 type="button">
                             Upload
                         </button>
@@ -70,7 +72,7 @@
             </div>
             <div id="predict" class="row mt-3">
                 <div class="col-12 float-end">
-                    <button id="bt_predict" disabled="true" class="btn btn-primary btn-sm float-end"
+                    <button id="bt_predict" disabled="true" class="btn btn-primary float-end px-4"
                             onclick="run(); document.querySelector('#bt_predict').setAttribute('disabled', 'true')">
                         Predict the structure
                     </button>
@@ -89,7 +91,7 @@
                     <div class="input-group mb-3">
                         <input id="prediction_url" type="text" class="form-control" placeholder=""
                                aria-label="Prediction URL" aria-describedby="button-addon2">
-                        <button id="bt_copy" class="btn btn-sm btn-outline-primary" type="button"
+                        <button id="bt_copy" class="btn btn-outline-primary px-4" type="button"
                                 onclick="copy_url();"><i
                                 class="far fa-copy"></i></button>
                     </div>
@@ -106,19 +108,19 @@
                     <source src="/static/demo.mp4" type="video/mp4">
                 </video>
             </div>
-            <div class="row justify-content-center d-none" id="wrapper_molstar">
+            <div class="row justify-content-center d-none ml-1" id="wrapper_molstar">
                 <div id="molstar"></div>
             </div>
             <div id="bts_results" class="row d-none mt-2">
                 <div class="col-2">
-                    <button id="bt_download_pdb" class="btn btn-sm btn-outline-primary" onclick="">
+                    <button id="bt_download_pdb" class="btn btn-outline-primary px-4" onclick="">
                         <i class="fas fa-download" title="Download PDB" aria-hidden="true"></i>
                         PDB
                     </button>
                 </div>
                 <div class="col-10">
-                    <div class="input-group input-group-sm">
-                        <button id="bt_create_asset" class="btn btn-sm btn-outline-primary"
+                    <div class="input-group">
+                        <button id="bt_create_asset" class="btn btn-outline-primary px-4"
                                 onclick="">
                             <i class="fas fa-database" title="Create a data asset from results"
                                aria-hidden="true"></i>
@@ -133,26 +135,23 @@
             </div>
         </div>
     </div>
-</div>
-{% block footer %}
-<div class="mt-auto py-3 fixed-bottom">
-    <div class="container">
-        <div class="row">
-            <div class="col-3">
-                <a href="https://acmecorp-demo.codeocean.com/capsule/{{ meta.slug }}/tree" class="small text-white"
-                   style="text-decoration:none;"
-                   target="_blank">
-                    <img src=" {{ url_for('static', filename='co-logo-white.svg') }}" width="auto"
-                         height="12px" alt="CO Logo">
-                    <a href="https://acmecorp-demo.codeocean.com/capsule/{{ meta.slug }}/tree"
-                       class="small text-white ml-1"
-                       target="_blank">{{ meta.name }} <i class="fas fa-external-link"></i></a>
-                </a>
-            </div>
-            <div class="col-3">
-                <a href="https://www.nature.com/articles/s41592-022-01488-1" class="small text-white" target="_blank">ColabFold
-                    Paper in Nature Methods</a>
-            </div>
+
+    {% block footer %}
+    <div class="row mt-auto py-3 fixed-bottom">
+        <!--            <div class="col-3">-->
+        <!--                <a href="https://acmecorp-demo.codeocean.com/capsule/{{ meta.slug }}/tree" class="small text-white"-->
+        <!--                   style="text-decoration:none;"-->
+        <!--                   target="_blank">-->
+        <!--                    <img src=" {{ url_for('static', filename='co-logo-white.svg') }}" width="auto"-->
+        <!--                         height="12px" alt="CO Logo">-->
+        <!--                    <a href="https://acmecorp-demo.codeocean.com/capsule/{{ meta.slug }}/tree"-->
+        <!--                       class="small text-white ml-1"-->
+        <!--                       target="_blank">{{ meta.name }} <i class="fas fa-external-link"></i></a>-->
+        <!--                </a>-->
+        <!--            </div>-->
+        <div class="col-3 align-self-end">
+            <small class="text-white"><a href="https://www.nature.com/articles/s41592-022-01488-1" target="_blank" class="text-white">ColabFold
+                Paper</a> in Nature Methods</small>
         </div>
     </div>
 </div>

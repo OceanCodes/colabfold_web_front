@@ -45,9 +45,8 @@ function run() {
         .then(data => {
             console.log(`Computation id: ${data['computation_id']}`)
             history.pushState({}, null, `computation/${data['computation_id']}`);
-            $('#time_out').style.display = 'flex';
+            $('#time_out').classList.toggle('d-none');
             $('#demo').play();
-            // $('#overlay_predicting').style.display = 'flex';
             $('#progress_predicting').classList.toggle('d-none');
             start_progress_bar();
             $('#prediction_url').value = window.location.href;
@@ -185,11 +184,12 @@ function render_result(computation_id) {
             if (!response.ok) {
                 throw new Error("Can't download a result");
             }
-            $('#time_out').style.display = 'none';
-            // $('#overlay_predicting').style.display = 'none';
-            $('#progress_predicting').classList.toggle('d-none');
-            $('#demo').style.display = 'none';
-            $('#wrapper_molstar').classList.toggle('d-none');
+            let wrapper_molstar = $('#wrapper_molstar');
+            $('#time_out').classList.toggle('d-none');
+            $('#progress_predicting').classList.add('d-none');
+            $('#demo').classList.toggle('d-none');
+            wrapper_molstar.classList.remove('d-none');
+            wrapper_molstar.classList.add('d-flex')
             molstar(`/static/pdb/${computation_id}_predicted_structure.pdb`);
             $('#bt_download_pdb').onclick = () => {
                 return download_uri(`/static/pdb/${computation_id}_predicted_structure.pdb`, `${computation_id}_predicted_structure.pdb`)
@@ -217,15 +217,13 @@ function listener_url() {
     if (url.endsWith("/computation")) {
         console.log('No Computation ID found');
     } else {
-        // Not sure about this part - simple .split('/') should work too
         const re = /\/computation\/([a-z0-9_]+(-[a-z0-9_]+)*)$/; // regular expression to match "/computation/" followed by one or more word characters at the end of the string
         const match = re.exec(url); // attempt to match the regular expression to the URL
         if (match) {
             const computation_id = match[0].split('/')[2]; // extract the matched ID from the regular expression match
             console.log(`Computation ID found: ${computation_id}`);
-            // $('#time_out').style.display = 'block';
             $('#prediction_url').value = window.location.href;
-            $('#prediction').style.display = 'flex';
+            $('#prediction').classList.toggle('d-none');
             listener_status(computation_id).then(r => console.log('Checking the computation status'));
         } else {
             console.log('No Computation ID found');

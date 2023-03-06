@@ -9,7 +9,7 @@ co_domain = "https://acmecorp-demo.codeocean.com"
 co_client = CodeOceanClient(domain=co_domain, token=co_api_token)
 
 # API parameters
-capsule_id = "cb2f63ba-2030-4929-92ae-91687ca6713e"
+capsule_id = "211e9f4f-6ccb-4b79-adcb-76563a2213bc"
 data_asset = [{"id": "e09a0db8-b682-4cb0-b9c6-0b7c93177777", "mount": "colabfold"}]
 
 
